@@ -1,23 +1,23 @@
-#include <process/messageQueue/messageQueue.h>
+#include <process/messageQueue/dgMessageQueue.h>
 #include <cassert>
 
-a3MessageQueue::a3MessageQueue()
+dgMessageQueue::dgMessageQueue()
 {
 
 }
 
-a3MessageQueue::~a3MessageQueue()
+dgMessageQueue::~dgMessageQueue()
 {
 
 }
 
-void a3MessageQueue::init(char* buffer, int buffer_size, int msg_size)
+void dgMessageQueue::init(char* buffer, int buffer_size, int msg_size)
 {
 	assert(buffer);
 	assert(buffer_size > 0);
 	assert(msg_size > 0);
 
-	int queue_head_size = sizeof(a3MessageQueueHead);
+	int queue_head_size = sizeof(dgMessageQueueHead);
 
 	// at least enough for one message.
 	assert(buffer_size > (queue_head_size + msg_size));
@@ -25,12 +25,12 @@ void a3MessageQueue::init(char* buffer, int buffer_size, int msg_size)
 	int total_msg_size = buffer_size - queue_head_size;
 	int total_msg_num = total_msg_size / msg_size;
 
-	mqHead = (a3MessageQueueHead*)buffer;
+	mqHead = (dgMessageQueueHead*)buffer;
 	entries.resize(total_msg_num);
 
 	buffer += queue_head_size;
 	for (int i = 0; i < total_msg_num; i++) {
-		a3MessageEntryHead* msg = (a3MessageEntryHead*)buffer;
+		dgMessageEntryHead* msg = (dgMessageEntryHead*)buffer;
 		entries[i] = msg;
 		buffer += msg_size;
 	}
@@ -39,7 +39,7 @@ void a3MessageQueue::init(char* buffer, int buffer_size, int msg_size)
 	messageSize = msg_size;
 }
 
-void a3MessageQueue::uninit()
+void dgMessageQueue::uninit()
 {
 	entries.clear();
 	messageNum = 0;
@@ -47,13 +47,13 @@ void a3MessageQueue::uninit()
 	mqHead = NULL;
 }
 
-bool a3MessageQueue::isEmpty()
+bool dgMessageQueue::isEmpty()
 {
 	assert(mqHead);
 	return mqHead->tail == mqHead->head;
 }
 
-bool a3MessageQueue::isFull()
+bool dgMessageQueue::isFull()
 {
 	assert(mqHead);
 	assert(messageNum > 0);
@@ -63,7 +63,7 @@ bool a3MessageQueue::isFull()
 	return (tail + 1) % messageNum == head;
 }
 
-int a3MessageQueue::getSize()
+int dgMessageQueue::getSize()
 {
 	assert(mqHead);
 	assert(messageNum > 0);
@@ -73,7 +73,7 @@ int a3MessageQueue::getSize()
 	return (tail - head + messageNum) % messageNum;
 }
 
-bool a3MessageQueue::enqueue(const a3MessageEntryHead& msg)
+bool dgMessageQueue::enqueue(const dgMessageEntryHead& msg)
 {
 	assert(mqHead);
 	assert(messageNum > 0);
@@ -83,7 +83,7 @@ bool a3MessageQueue::enqueue(const a3MessageEntryHead& msg)
 	}
 	
 	int tail = mqHead->tail;
-	a3MessageEntryHead* dst = entries[tail];
+	dgMessageEntryHead* dst = entries[tail];
 
 	const char* src_buffer = (const char*)&msg;
 	char* dst_buffer = (char*)dst;
@@ -95,7 +95,7 @@ bool a3MessageQueue::enqueue(const a3MessageEntryHead& msg)
 	return true;
 }
 
-bool a3MessageQueue::dequeue(a3MessageEntryHead& msg)
+bool dgMessageQueue::dequeue(dgMessageEntryHead& msg)
 {
 	assert(mqHead);
 	assert(messageNum > 0);
@@ -105,7 +105,7 @@ bool a3MessageQueue::dequeue(a3MessageEntryHead& msg)
 	}
 
 	int head = mqHead->head;
-	a3MessageEntryHead* src = entries[head];
+	dgMessageEntryHead* src = entries[head];
 
 	const char* src_buffer = (const char*)src;
 	char* dst_buffer = (char*)&msg;

@@ -1,8 +1,8 @@
-#include <process/messageQueue/messageQueueIPC.h>
+#include <process/messageQueue/dgMessageQueueIPC.h>
 
 #include <cassert>
 
-void a3Mutex::create(const wchar_t* name)
+void dgMutex::create(const wchar_t* name)
 {
 	mutex = ::CreateMutex(NULL, false, name);
 	assert(mutex);
@@ -10,7 +10,7 @@ void a3Mutex::create(const wchar_t* name)
 	name = name;
 }
 
-void a3Mutex::open(const wchar_t* name)
+void dgMutex::open(const wchar_t* name)
 {
 	mutex = ::OpenMutex(SYNCHRONIZE, false, name);
 	assert(mutex);
@@ -18,7 +18,7 @@ void a3Mutex::open(const wchar_t* name)
 	name = name;
 }
 
-void a3Mutex::destroy()
+void dgMutex::destroy()
 {
 	if (mutex) {
 		::CloseHandle(mutex);
@@ -27,14 +27,14 @@ void a3Mutex::destroy()
 	name.clear();
 }
 
-void a3Mutex::lock()
+void dgMutex::lock()
 {
 	if (mutex) {
 		::WaitForSingleObject(mutex, INFINITE);
 	}
 }
 
-void a3Mutex::unlock()
+void dgMutex::unlock()
 {
 	if (mutex) {
 		::ReleaseMutex(mutex);
@@ -98,13 +98,13 @@ int MessageQueueBuffer::getBufferSize()
 	return size;
 }
 
-void a3MessageQueueIPC::init(const wchar_t* _name, bool create, int msg_max_num, int msg_max_size)
+void dgMessageQueueIPC::init(const wchar_t* _name, bool create, int msg_max_num, int msg_max_size)
 {
 	std::wstring mq_name(_name);
 	std::wstring mq_lock_name = mq_name + std::wstring(L"_lock");
 
     // 消息取最大跨距做单一消息内存分配
-	int buffer_size = sizeof(a3MessageQueueHead) + (msg_max_num+1) * msg_max_size;
+	int buffer_size = sizeof(dgMessageQueueHead) + (msg_max_num+1) * msg_max_size;
 	if (!create) {
 		buffer.open(mq_name.c_str(), buffer_size);
 		mutex.open(mq_lock_name.c_str());
@@ -118,44 +118,44 @@ void a3MessageQueueIPC::init(const wchar_t* _name, bool create, int msg_max_num,
 	this->name = mq_name;
 }
 
-void a3MessageQueueIPC::uninit()
+void dgMessageQueueIPC::uninit()
 {
 	queue.uninit();
 	buffer.destroy();
 	mutex.destroy();
 }
 
-bool a3MessageQueueIPC::isEmpty()
+bool dgMessageQueueIPC::isEmpty()
 {
-	a3MutexGuard guard(mutex);
+	dgMutexGuard guard(mutex);
 
 	return queue.isEmpty();
 }
 
-bool a3MessageQueueIPC::isFull()
+bool dgMessageQueueIPC::isFull()
 {
-	a3MutexGuard guard(mutex);
+	dgMutexGuard guard(mutex);
 
 	return queue.isFull();
 }
 
-int a3MessageQueueIPC::getSize()
+int dgMessageQueueIPC::getSize()
 {
-	a3MutexGuard guard(mutex);
+	dgMutexGuard guard(mutex);
 
 	return queue.getSize();
 }
 
-bool a3MessageQueueIPC::enqueue(const a3MessageEntryHead& msg)
+bool dgMessageQueueIPC::enqueue(const dgMessageEntryHead& msg)
 {
-	a3MutexGuard guard(mutex);
+	dgMutexGuard guard(mutex);
 
 	return queue.enqueue(msg);
 }
 
-bool a3MessageQueueIPC::dequeue(a3MessageEntryHead& msg)
+bool dgMessageQueueIPC::dequeue(dgMessageEntryHead& msg)
 {
-	a3MutexGuard guard(mutex);
+	dgMutexGuard guard(mutex);
 
 	return queue.dequeue(msg);
 }

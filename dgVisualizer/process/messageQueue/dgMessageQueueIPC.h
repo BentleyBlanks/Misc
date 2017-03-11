@@ -4,11 +4,11 @@
 #include <windows.h>
 #include <process/messageQueue/messageQueue.h>
 
-struct a3Mutex
+struct dgMutex
 {
 public:
-	a3Mutex():mutex(NULL){}
-	~a3Mutex() {}
+	dgMutex():mutex(NULL){}
+	~dgMutex() {}
 
 	void create(const wchar_t* name);
 	void open(const wchar_t* name);
@@ -22,23 +22,23 @@ public:
 	HANDLE mutex = NULL;
 
 private:
-	a3Mutex(const a3Mutex&);
-	void operator=(const a3Mutex&);
+	dgMutex(const dgMutex&);
+	void operator=(const dgMutex&);
 };
 
 
-struct a3MutexGuard
+struct dgMutexGuard
 {
 public:
-	a3MutexGuard(a3Mutex& mutex) : mutex(mutex) {
+	dgMutexGuard(dgMutex& mutex) : mutex(mutex) {
 		mutex.lock();
 	}
 
-	~a3MutexGuard() {
+	~dgMutexGuard() {
 		mutex.unlock();
 	}
 public:
-	a3Mutex& mutex;
+	dgMutex& mutex;
 };
 
 
@@ -67,11 +67,11 @@ private:
 	void operator=(const MessageQueueBuffer&);
 };
 
-class a3MessageQueueIPC
+class dgMessageQueueIPC
 {
 public:
-	a3MessageQueueIPC(){}
-	~a3MessageQueueIPC(){}
+	dgMessageQueueIPC(){}
+	~dgMessageQueueIPC(){}
 
 	void init(const wchar_t* name, bool create, int msgMaxNum, int msgMaxSize);
 	void uninit();
@@ -80,16 +80,16 @@ public:
 	bool isFull();
 	int  getSize();
 
-	bool enqueue(const a3MessageEntryHead& msg);
-	bool dequeue(a3MessageEntryHead& msg);
+	bool enqueue(const dgMessageEntryHead& msg);
+	bool dequeue(dgMessageEntryHead& msg);
 
 private:
 	std::wstring name;
-	a3Mutex mutex;
+	dgMutex mutex;
 	MessageQueueBuffer buffer;
-	a3MessageQueue queue;
+	dgMessageQueue queue;
 
 private:
-	a3MessageQueueIPC(const a3MessageQueueIPC&);
-	void operator=(const a3MessageQueueIPC&);
+	dgMessageQueueIPC(const dgMessageQueueIPC&);
+	void operator=(const dgMessageQueueIPC&);
 };
