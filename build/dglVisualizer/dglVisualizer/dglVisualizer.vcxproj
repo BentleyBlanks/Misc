@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E2D343B3-DF5F-49F0-A217-F175C6F3CF69}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>dgVisualizer</RootNamespace>
+    <RootNamespace>dglVisualizer</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../../dgVisualizer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../dglVisualizer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,12 +147,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\dgVisualizer\process\messageQueue\messageQueue.cpp" />
-    <ClCompile Include="..\..\..\dgVisualizer\process\messageQueue\messageQueueIPC.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\openframeworks\math\dglCoordinate.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueue.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueueIPC.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\dgVisualizer\process\messageQueue\messageQueue.h" />
-    <ClInclude Include="..\..\..\dgVisualizer\process\messageQueue\messageQueueIPC.h" />
+    <ClInclude Include="..\..\..\dglVisualizer\openframeworks\math\dglCoordinate.h" />
+    <ClInclude Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueue.h" />
+    <ClInclude Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueueIPC.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
