@@ -1,7 +1,7 @@
-# dglVisualizer
+# DGL
 An utility for convenient data visualizing. For the moment is testing on [OpenFrameworks](https://github.com/openframeworks).
 
-dglVisualizer was developed by picking up modules from past Demo projects. It would not use OpenFrameworks in the future.
+DGL was developed by picking up modules from past Demo projects. It would not use OpenFrameworks in the future.
 
 # Instructions
 
