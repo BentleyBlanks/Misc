@@ -16,6 +16,30 @@
     <Filter Include="dglVisualizer\openframeworks\math">
       <UniqueIdentifier>{cfda6cb9-870c-468e-86fd-ebb1bceb0fca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="dglVisualizer\openframeworks\animation">
+      <UniqueIdentifier>{cf4660a8-80a4-47e5-a19b-26419daa6550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dglVisualizer\objdiv">
+      <UniqueIdentifier>{8b8c3183-e1a7-4361-a4fc-47c36c9ce081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dglVisualizer\draw">
+      <UniqueIdentifier>{f95d3b87-3bd6-4fb3-b5bd-52cb1bdd7408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dglVisualizer\draw\process_draw">
+      <UniqueIdentifier>{12467b23-9a8b-48f2-9ad4-38e0167b4112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dglVisualizer\sampling">
+      <UniqueIdentifier>{db16b316-cd1a-47af-8629-edc54720d125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dglVisualizer\thread">
+      <UniqueIdentifier>{b648f533-c539-48f5-84c8-24a16f1a0689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dglVisualizer\image">
+      <UniqueIdentifier>{103e49f3-0e00-45eb-89b6-a0d39d6f164a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dglVisualizer\timer">
+      <UniqueIdentifier>{60a6a028-3a10-42c7-89ec-4e276840cd44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\dglVisualizer\openframeworks\math\dglCoordinate.cpp">
@@ -27,6 +51,33 @@
     <ClCompile Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueueIPC.cpp">
       <Filter>dglVisualizer\process\messageQueue</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\dglVisualizer\openframeworks\animation\dglAnimation.cpp">
+      <Filter>dglVisualizer\openframeworks\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dglVisualizer\objdiv\obj_divide.cpp">
+      <Filter>dglVisualizer\objdiv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dglVisualizer\draw\Debug.cpp">
+      <Filter>dglVisualizer\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dglVisualizer\draw\DrawUtils.cpp">
+      <Filter>dglVisualizer\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dglVisualizer\draw\process_draw\RBProcess.cpp">
+      <Filter>dglVisualizer\draw\process_draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dglVisualizer\draw\process_draw\sender.cpp">
+      <Filter>dglVisualizer\draw\process_draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dglVisualizer\sampling\checkpdf.cpp">
+      <Filter>dglVisualizer\sampling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dglVisualizer\image\image.cpp">
+      <Filter>dglVisualizer\image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dglVisualizer\timer\t3Timer.cpp">
+      <Filter>dglVisualizer\timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\dglVisualizer\openframeworks\math\dglCoordinate.h">
@@ -37,6 +88,27 @@
     </ClInclude>
     <ClInclude Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueueIPC.h">
       <Filter>dglVisualizer\process\messageQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\dglVisualizer\openframeworks\animation\dglAnimation.h">
+      <Filter>dglVisualizer\openframeworks\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\dglVisualizer\draw\Debug.h">
+      <Filter>dglVisualizer\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\dglVisualizer\draw\DrawUtils.h">
+      <Filter>dglVisualizer\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\dglVisualizer\draw\process_draw\RBProcess.h">
+      <Filter>dglVisualizer\draw\process_draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\dglVisualizer\draw\process_draw\Sender.h">
+      <Filter>dglVisualizer\draw\process_draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\dglVisualizer\thread\ThreadPool.h">
+      <Filter>dglVisualizer\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\dglVisualizer\timer\t3Timer.h">
+      <Filter>dglVisualizer\timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

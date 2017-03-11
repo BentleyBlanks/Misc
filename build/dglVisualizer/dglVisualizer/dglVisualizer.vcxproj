@@ -32,7 +32,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -77,6 +77,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -147,14 +148,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\dglVisualizer\draw\Debug.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\draw\DrawUtils.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\draw\process_draw\RBProcess.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\draw\process_draw\sender.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\image\image.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\objdiv\obj_divide.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\openframeworks\animation\dglAnimation.cpp" />
     <ClCompile Include="..\..\..\dglVisualizer\openframeworks\math\dglCoordinate.cpp" />
     <ClCompile Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueue.cpp" />
     <ClCompile Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueueIPC.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\sampling\checkpdf.cpp" />
+    <ClCompile Include="..\..\..\dglVisualizer\timer\t3Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\dglVisualizer\draw\Debug.h" />
+    <ClInclude Include="..\..\..\dglVisualizer\draw\DrawUtils.h" />
+    <ClInclude Include="..\..\..\dglVisualizer\draw\process_draw\RBProcess.h" />
+    <ClInclude Include="..\..\..\dglVisualizer\draw\process_draw\Sender.h" />
+    <ClInclude Include="..\..\..\dglVisualizer\openframeworks\animation\dglAnimation.h" />
     <ClInclude Include="..\..\..\dglVisualizer\openframeworks\math\dglCoordinate.h" />
     <ClInclude Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueue.h" />
     <ClInclude Include="..\..\..\dglVisualizer\process\messageQueue\dglMessageQueueIPC.h" />
+    <ClInclude Include="..\..\..\dglVisualizer\thread\ThreadPool.h" />
+    <ClInclude Include="..\..\..\dglVisualizer\timer\t3Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
