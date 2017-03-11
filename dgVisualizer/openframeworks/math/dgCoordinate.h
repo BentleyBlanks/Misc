@@ -8,6 +8,7 @@ public:
 
     ~dgCoordinate();
     
+    // 设定坐标轴原点
     void setOrigin(float x, float y);
 
     // 显式格间距(pixel)
@@ -26,10 +27,6 @@ public:
     void drawAxis();
 
 private:
-    friend class dgDistribution1D;
-
-    friend class dgDistribution2D;
-
     ofVec2f origin;
 
     float interval;
