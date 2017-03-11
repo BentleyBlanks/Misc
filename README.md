@@ -1,9 +1,22 @@
-# DGL
+# Misc
 An utility for convenient data visualizing. For the moment is testing on [OpenFrameworks](https://github.com/openframeworks).
 
-DGL was developed by picking up modules from past Demo projects. It would not use OpenFrameworks in the future.
+Misc was developed by picking up modules from past Demo projects. It would not use OpenFrameworks in the future.
 
 # Instructions
+
+Module | Instruction | Author
+---- |---- |----
+draw | |
+image | | 
+objdiv | |
+openframeworks | |
+process | |
+sampling | | 
+thread | | 
+timer | |
+
+
 
 # Distributor
 
