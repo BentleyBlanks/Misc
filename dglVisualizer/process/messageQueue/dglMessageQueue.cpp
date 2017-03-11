@@ -1,23 +1,23 @@
-#include <process/messageQueue/dgMessageQueue.h>
+#include <process/messageQueue/dglMessageQueue.h>
 #include <cassert>
 
-dgMessageQueue::dgMessageQueue()
+dglMessageQueue::dglMessageQueue()
 {
 
 }
 
-dgMessageQueue::~dgMessageQueue()
+dglMessageQueue::~dglMessageQueue()
 {
 
 }
 
-void dgMessageQueue::init(char* buffer, int buffer_size, int msg_size)
+void dglMessageQueue::init(char* buffer, int buffer_size, int msg_size)
 {
 	assert(buffer);
 	assert(buffer_size > 0);
 	assert(msg_size > 0);
 
-	int queue_head_size = sizeof(dgMessageQueueHead);
+	int queue_head_size = sizeof(dglMessageQueueHead);
 
 	// at least enough for one message.
 	assert(buffer_size > (queue_head_size + msg_size));
@@ -25,12 +25,12 @@ void dgMessageQueue::init(char* buffer, int buffer_size, int msg_size)
 	int total_msg_size = buffer_size - queue_head_size;
 	int total_msg_num = total_msg_size / msg_size;
 
-	mqHead = (dgMessageQueueHead*)buffer;
+	mqHead = (dglMessageQueueHead*)buffer;
 	entries.resize(total_msg_num);
 
 	buffer += queue_head_size;
 	for (int i = 0; i < total_msg_num; i++) {
-		dgMessageEntryHead* msg = (dgMessageEntryHead*)buffer;
+		dglMessageEntryHead* msg = (dglMessageEntryHead*)buffer;
 		entries[i] = msg;
 		buffer += msg_size;
 	}
@@ -39,7 +39,7 @@ void dgMessageQueue::init(char* buffer, int buffer_size, int msg_size)
 	messageSize = msg_size;
 }
 
-void dgMessageQueue::uninit()
+void dglMessageQueue::uninit()
 {
 	entries.clear();
 	messageNum = 0;
@@ -47,13 +47,13 @@ void dgMessageQueue::uninit()
 	mqHead = NULL;
 }
 
-bool dgMessageQueue::isEmpty()
+bool dglMessageQueue::isEmpty()
 {
 	assert(mqHead);
 	return mqHead->tail == mqHead->head;
 }
 
-bool dgMessageQueue::isFull()
+bool dglMessageQueue::isFull()
 {
 	assert(mqHead);
 	assert(messageNum > 0);
@@ -63,7 +63,7 @@ bool dgMessageQueue::isFull()
 	return (tail + 1) % messageNum == head;
 }
 
-int dgMessageQueue::getSize()
+int dglMessageQueue::getSize()
 {
 	assert(mqHead);
 	assert(messageNum > 0);
@@ -73,7 +73,7 @@ int dgMessageQueue::getSize()
 	return (tail - head + messageNum) % messageNum;
 }
 
-bool dgMessageQueue::enqueue(const dgMessageEntryHead& msg)
+bool dglMessageQueue::enqueue(const dglMessageEntryHead& msg)
 {
 	assert(mqHead);
 	assert(messageNum > 0);
@@ -83,7 +83,7 @@ bool dgMessageQueue::enqueue(const dgMessageEntryHead& msg)
 	}
 	
 	int tail = mqHead->tail;
-	dgMessageEntryHead* dst = entries[tail];
+	dglMessageEntryHead* dst = entries[tail];
 
 	const char* src_buffer = (const char*)&msg;
 	char* dst_buffer = (char*)dst;
@@ -95,7 +95,7 @@ bool dgMessageQueue::enqueue(const dgMessageEntryHead& msg)
 	return true;
 }
 
-bool dgMessageQueue::dequeue(dgMessageEntryHead& msg)
+bool dglMessageQueue::dequeue(dglMessageEntryHead& msg)
 {
 	assert(mqHead);
 	assert(messageNum > 0);
@@ -105,7 +105,7 @@ bool dgMessageQueue::dequeue(dgMessageEntryHead& msg)
 	}
 
 	int head = mqHead->head;
-	dgMessageEntryHead* src = entries[head];
+	dglMessageEntryHead* src = entries[head];
 
 	const char* src_buffer = (const char*)src;
 	char* dst_buffer = (char*)&msg;

@@ -1,12 +1,12 @@
 #pragma once
 #include "ofMain.h"
 
-class dgCoordinate
+class dglCoordinate
 {
 public:
-    dgCoordinate();
+    dglCoordinate();
 
-    ~dgCoordinate();
+    ~dglCoordinate();
     
     // 设定坐标轴原点
     void setOrigin(float x, float y);

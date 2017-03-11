@@ -4,11 +4,11 @@
 #include <windows.h>
 #include <process/messageQueue/messageQueue.h>
 
-struct dgMutex
+struct dglMutex
 {
 public:
-	dgMutex():mutex(NULL){}
-	~dgMutex() {}
+	dglMutex():mutex(NULL){}
+	~dglMutex() {}
 
 	void create(const wchar_t* name);
 	void open(const wchar_t* name);
@@ -22,23 +22,23 @@ public:
 	HANDLE mutex = NULL;
 
 private:
-	dgMutex(const dgMutex&);
-	void operator=(const dgMutex&);
+	dglMutex(const dglMutex&);
+	void operator=(const dglMutex&);
 };
 
 
-struct dgMutexGuard
+struct dglMutexGuard
 {
 public:
-	dgMutexGuard(dgMutex& mutex) : mutex(mutex) {
+	dglMutexGuard(dglMutex& mutex) : mutex(mutex) {
 		mutex.lock();
 	}
 
-	~dgMutexGuard() {
+	~dglMutexGuard() {
 		mutex.unlock();
 	}
 public:
-	dgMutex& mutex;
+	dglMutex& mutex;
 };
 
 
@@ -67,11 +67,11 @@ private:
 	void operator=(const MessageQueueBuffer&);
 };
 
-class dgMessageQueueIPC
+class dglMessageQueueIPC
 {
 public:
-	dgMessageQueueIPC(){}
-	~dgMessageQueueIPC(){}
+	dglMessageQueueIPC(){}
+	~dglMessageQueueIPC(){}
 
 	void init(const wchar_t* name, bool create, int msgMaxNum, int msgMaxSize);
 	void uninit();
@@ -80,16 +80,16 @@ public:
 	bool isFull();
 	int  getSize();
 
-	bool enqueue(const dgMessageEntryHead& msg);
-	bool dequeue(dgMessageEntryHead& msg);
+	bool enqueue(const dglMessageEntryHead& msg);
+	bool dequeue(dglMessageEntryHead& msg);
 
 private:
 	std::wstring name;
-	dgMutex mutex;
+	dglMutex mutex;
 	MessageQueueBuffer buffer;
-	dgMessageQueue queue;
+	dglMessageQueue queue;
 
 private:
-	dgMessageQueueIPC(const dgMessageQueueIPC&);
-	void operator=(const dgMessageQueueIPC&);
+	dglMessageQueueIPC(const dglMessageQueueIPC&);
+	void operator=(const dglMessageQueueIPC&);
 };

@@ -1,25 +1,25 @@
-#include "dgCoordinate.h"
+#include "dglCoordinate.h"
 
-dgCoordinate::dgCoordinate()
+dglCoordinate::dglCoordinate()
 {
 }
 
-dgCoordinate::~dgCoordinate()
+dglCoordinate::~dglCoordinate()
 {
 
 }
 
-void dgCoordinate::setOrigin(float x, float y)
+void dglCoordinate::setOrigin(float x, float y)
 {
     origin.set(x, y);
 }
 
-void dgCoordinate::setInterval(float interval)
+void dglCoordinate::setInterval(float interval)
 {
     this->interval = interval;
 }
 
-void dgCoordinate::setAxisLength(float xLength, float yLength)
+void dglCoordinate::setAxisLength(float xLength, float yLength)
 {
     this->xLength = xLength;
     this->yLength = yLength;
@@ -29,7 +29,7 @@ void dgCoordinate::setAxisLength(float xLength, float yLength)
 }
 
 
-void dgCoordinate::drawAxis()
+void dglCoordinate::drawAxis()
 {
     // Y
     ofDrawArrow(origin, ofVec2f(origin.x, origin.y - yLength), 4);
@@ -38,7 +38,7 @@ void dgCoordinate::drawAxis()
     ofDrawArrow(origin, ofVec2f(origin.x + xLength, origin.y), 4);
 }
 
-void dgCoordinate::drawPiecewise(vector<float> function)
+void dglCoordinate::drawPiecewise(vector<float> function)
 {
     float max = -1.0f;
     for(int i = 0; i < function.size(); i++)
@@ -65,7 +65,7 @@ void dgCoordinate::drawPiecewise(vector<float> function)
     }
 }
 
-void dgCoordinate::drawLinear(vector<float> function)
+void dglCoordinate::drawLinear(vector<float> function)
 {
     float max = -1.0f;
     for(int i = 0; i < function.size(); i++)
