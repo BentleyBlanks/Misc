@@ -1,6 +1,5 @@
 #pragma once
 #include "ofMain.h"
-#include "Vector3.h"
 
 
 class Graph3D
@@ -13,8 +12,6 @@ public:
 	void set_val();
 
 	void draw();
-
-	static void draw_aabb(RBVector3 mi,RBVector3 ma);
 protected:
 
 private:
@@ -26,17 +23,3 @@ private:
 	ofMesh _m;
 };
 
-class Axis3D
-{
-public:
-	void draw();
-};
-
-class Graph2D
-{
-public:
-	static void draw_function(float xa,float xb,int xres);
-	static void draw_function1(float xa,float xb,int xres);
-	static void sample_concentric_disk(float u1,float u2,float *dx,float *dy);
-	static RBVector3 sample_cosine_hemisphere(float u1,float u2);
-};
