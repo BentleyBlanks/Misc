@@ -76,7 +76,56 @@ void check(std::vector<float> v,NormalView* app,ofColor c=ofColor::black,float s
 		int idx = (float)i/acc*app->grid_panel->get_res_w();
 		app->grid_panel->set_px(idx,a[i]*app->grid_panel->get_res_h()*scale+10,c);
 	}
+}
 
+//input normalized
+void check2d(std::vector<ofVec2f>& v,GridCanvasPanel3D* grid_3d)
+{
+	if(v.empty()) return;
+	int x_res = 50;
+	int y_res = 50;
+	float intervalx = 1.f/x_res;
+	float intervaly = 1.f/y_res;
+	float* a = new float[x_res*y_res];
+	std::memset(a,0,sizeof(int)*x_res*y_res);
+
+	for(auto i:v)
+	{
+		for(int j=0;j<x_res;++j)
+		{
+			if(i.x>j*intervalx&&i.x<(j+1)*intervalx)
+			{
+				for(int k=0;k<y_res;++k)
+				{
+					if(i.y>k*intervaly&&i.y<(k+1)*intervaly)
+					{
+						a[j+k*x_res]=a[j+k*x_res]+1.f;
+						goto label;
+					}
+				}
+			}
+		}
+		label:;
+	}
 	
+	//总长度
+	int rew = grid_3d->get_res_w();
+	//总宽度
+	int reh = grid_3d->get_res_h();
+
+	for(int i=0;i<y_res;++i)
+	{
+		for(int j=0;j<x_res;++j)
+		{
+			if(abs(a[j+i*x_res])<0.01)
+				continue;
+			float val =  ((float)a[j+i*x_res])/v.size()*x_res*y_res;
+			float yp = ((float)i)/y_res;
+			float xp = ((float)j)/x_res;
+			grid_3d->set_px( xp*rew,yp*reh,val,ofColor::green,0.2);
+
+
+		}
+	}
 
 }
