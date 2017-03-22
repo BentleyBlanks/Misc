@@ -1,13 +1,13 @@
 #pragma once
 #include "ofMain.h"
 
-double mult(ofVec2f a, ofVec2f b, ofVec2f c)
+double mult3(ofVec2f a, ofVec2f b, ofVec2f c)
 {
     return (a.x - c.x)*(b.y - c.y) - (b.x - c.x)*(a.y - c.y);
 }
 
-//aa, bbÎªÒ»ÌõÏß¶ÎÁ½¶Ëµã cc, ddÎªÁíÒ»ÌõÏß¶ÎµÄÁ½¶Ëµã Ïà½»·µ»Øtrue, ²»Ïà½»·µ»Øfalse  
-bool intersect(ofVec2f aa, ofVec2f bb, ofVec2f cc, ofVec2f dd)
+//aa, bbä¸ºä¸€æ¡çº¿æ®µä¸¤ç«¯ç‚¹ cc, ddä¸ºå¦ä¸€æ¡çº¿æ®µçš„ä¸¤ç«¯ç‚¹ ç›¸äº¤è¿”å›true, ä¸ç›¸äº¤è¿”å›false  
+bool lineIntersect(ofVec2f aa, ofVec2f bb, ofVec2f cc, ofVec2f dd)
 {
     if(max(aa.x, bb.x)<min(cc.x, dd.x))
     {
@@ -25,48 +25,50 @@ bool intersect(ofVec2f aa, ofVec2f bb, ofVec2f cc, ofVec2f dd)
     {
         return false;
     }
-    if(mult(cc, bb, aa)*mult(bb, dd, aa)<0)
+    if(mult3(cc, bb, aa)*mult3(bb, dd, aa)<0)
     {
         return false;
     }
-    if(mult(aa, dd, cc)*mult(dd, bb, cc)<0)
+    if(mult3(aa, dd, cc)*mult3(dd, bb, cc)<0)
     {
         return false;
     }
     return true;
 }
 
-// Ïß¶ÎÏà½»²âÊÔ²¢Çó½»µã
+// çº¿æ®µç›¸äº¤æµ‹è¯•å¹¶æ±‚äº¤ç‚¹
 bool segmentsIntersect(ofVec2f& result, ofVec2f a, ofVec2f b, ofVec2f c, ofVec2f d)
 {
 
-    // Èı½ÇĞÎabc Ãæ»ıµÄ2±¶  
+    // ä¸‰è§’å½¢abc é¢ç§¯çš„2å€  
     float area_abc = (a.x - c.x) * (b.y - c.y) - (a.y - c.y) * (b.x - c.x);
 
-    // Èı½ÇĞÎabd Ãæ»ıµÄ2±¶  
+    // ä¸‰è§’å½¢abd é¢ç§¯çš„2å€  
     float area_abd = (a.x - d.x) * (b.y - d.y) - (a.y - d.y) * (b.x - d.x);
 
-    // Ãæ»ı·ûºÅÏàÍ¬ÔòÁ½µãÔÚÏß¶ÎÍ¬²à,²»Ïà½» (¶ÔµãÔÚÏß¶ÎÉÏµÄÇé¿ö,±¾Àıµ±×÷²»Ïà½»´¦Àí);  
+    // é¢ç§¯ç¬¦å·ç›¸åŒåˆ™ä¸¤ç‚¹åœ¨çº¿æ®µåŒä¾§,ä¸ç›¸äº¤ (å¯¹ç‚¹åœ¨çº¿æ®µä¸Šçš„æƒ…å†µ,æœ¬ä¾‹å½“ä½œä¸ç›¸äº¤å¤„ç†);  
     if(area_abc * area_abd >= 0)
     {
         return false;
     }
 
-    // Èı½ÇĞÎcda Ãæ»ıµÄ2±¶  
+    // ä¸‰è§’å½¢cda é¢ç§¯çš„2å€  
     float area_cda = (c.x - a.x) * (d.y - a.y) - (c.y - a.y) * (d.x - a.x);
-    // Èı½ÇĞÎcdb Ãæ»ıµÄ2±¶  
-    // ×¢Òâ: ÕâÀïÓĞÒ»¸öĞ¡ÓÅ»¯.²»ĞèÒªÔÙÓÃ¹«Ê½¼ÆËãÃæ»ı,¶øÊÇÍ¨¹ıÒÑÖªµÄÈı¸öÃæ»ı¼Ó¼õµÃ³ö.  
+    // ä¸‰è§’å½¢cdb é¢ç§¯çš„2å€  
+    // æ³¨æ„: è¿™é‡Œæœ‰ä¸€ä¸ªå°ä¼˜åŒ–.ä¸éœ€è¦å†ç”¨å…¬å¼è®¡ç®—é¢ç§¯,è€Œæ˜¯é€šè¿‡å·²çŸ¥çš„ä¸‰ä¸ªé¢ç§¯åŠ å‡å¾—å‡º.  
     float area_cdb = area_cda + area_abc - area_abd;
     if(area_cda * area_cdb >= 0)
     {
         return false;
     }
 
-    //¼ÆËã½»µã×ø±ê  
+    //è®¡ç®—äº¤ç‚¹åæ ‡  
     float t = area_cda / (area_abd - area_abc);
     float dx = t*(b.x - a.x),
         dy = t*(b.y - a.y);
 
     result.x = a.x + dx;
     result.y = a.y + dy;
+
+    return true;
 }
