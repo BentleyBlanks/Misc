@@ -1,4 +1,4 @@
-#include <core/log/a3Log.h>
+#include "a3Log.h"
 #include <stddef.h>
 #include <assert.h>
 #include <float.h>
@@ -12,7 +12,7 @@
 #include <iostream> 
 #include <fstream>
 #include <iomanip>
-#include <core/a3Settings.h>
+#include "a3Settings.h"
 
 #ifdef A3_PLATFORM_WINDOWS
 #define NOMINMAX 

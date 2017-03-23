@@ -1,7 +1,7 @@
 #ifndef A3_LOGHTML_H
 #define A3_LOGHTML_H
 
-#include <core/log/a3Log.h>
+#include "a3Log.h"
 
 // not support UTF8 log to file
 // default file name format [year]-[month]-[day]-Atmos-VertionType.html

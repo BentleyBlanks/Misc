@@ -1,7 +1,7 @@
 #ifndef A3_LOG_H
 #define A3_LOG_H
 
-#include <core/a3Settings.h>
+#include "a3Settings.h"
 
 enum a3LogLevel
 {
